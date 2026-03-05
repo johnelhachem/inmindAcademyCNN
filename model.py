@@ -10,13 +10,7 @@ from einops import rearrange  # handy tool for reshaping tensors (not strictly n
 #  Helper: Convolutional Block
 # -------------------------------
 def conv_block(in_channels, out_channels, pool=False):
-    """
-    A conv_block is like a mini "room" where the image is processed:
-    - Conv2d: looks at the image through small windows (3x3 filters)
-    - BatchNorm: keeps the values stable, prevents exploding or vanishing numbers
-    - ReLU: adds non-linearity, so the network can learn complex patterns
-    - Optional MaxPool: shrinks the image by half to reduce computation
-    """
+ 
     layers = [
         nn.Conv2d(in_channels, out_channels, kernel_size=3, padding=1, bias=False),
         nn.BatchNorm2d(out_channels),
@@ -30,11 +24,7 @@ def conv_block(in_channels, out_channels, pool=False):
 #  Residual Block (Skip Connections)
 # -------------------------------
 class ResidualBlock(nn.Module):
-    """
-    A ResidualBlock has two conv_blocks and a 'shortcut' path.
-    - The shortcut skips over the two conv blocks, adding the input directly to the output.
-    - This helps the network remember information and trains deeper networks more easily.
-    """
+  
     def __init__(self, channels):
         super().__init__()
         self.conv1 = conv_block(channels, channels)   
@@ -47,11 +37,7 @@ class ResidualBlock(nn.Module):
 #  ResNet9 Architecture
 # -------------------------------
 class ResNet9(nn.Module):
-    """
-    The full model:
-    - stem + stages + residual blocks + head
-    - We start with a small image (32x32) and gradually extract features
-    """
+
     def __init__(self, num_classes=10, dropout=0.2):
         super().__init__()
 
