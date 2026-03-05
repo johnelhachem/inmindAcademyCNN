@@ -1,13 +1,13 @@
 hyperparameters:
-  epochs: 10
-  batch_size: 8
-
+  epochs: 30
+  batch_size: 128
   lr: 0.001
-  momentum: 0.9 
-
-  num_workers: 8
+  max_lr: 0.01
+  weight_decay: 0.0001
+  val_split: 0.1
+  num_workers: 2
 
 paths:
-  train_dir: 'data/cifar10/train'
-  test_dir: 'data/cifar10/test'
-  model_path: 'weights/checkpoint.pth'
+  train_dir: "data/cifar10/train"
+  test_dir: "data/cifar10/test"
+  model_path: "weights/checkpoint.pth"
